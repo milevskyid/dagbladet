@@ -1,0 +1,54 @@
+# How many page loads did the Dagbladet front page receive on January 29th on desktop?
+SELECT COUNT(page_view)
+FROM page_loads
+WHERE date::date = '2020-01-29' AND device = 'desktop' AND harvester_id = 'www.dagbladet.no';
+
+# How many unique users (distinct UserIDs) visited the Dagbladet front page on January 29th between 10am and 11am (UTC time)?
+SELECT COUNT(DISTINCT user_id)
+FROM page_loads
+WHERE harvester_id = 'www.dagbladet.no' AND date between '2020-01-29 10:00:00' AND '2020-01-29 11:00:00';
+
+# What page received the most clicks from the KK front page on January 29th on mobile? 
+WITH pages AS (
+    SELECT c.harvester_id, count(c.page_view) AS total_count
+    FROM clicks c
+             JOIN page_loads pl ON c.page_view = pl.page_view
+    WHERE c.date::date = '2020-01-29' AND pl.harvester_id = 'www.kk.no' AND device = 'mobile'
+    GROUP BY c.harvester_id
+    ORDER BY total_count desc
+)
+SELECT harvester_id
+FROM pages
+LIMIT 1;
+
+# What percentage of pageviews on the Dagbladet front page on January 29th resulted in at least one click? 
+WITH views AS (
+    SELECT COUNT(page_view)::float AS views
+    FROM page_loads
+    WHERE date::date = '2020-01-29' AND harvester_id = 'www.dagbladet.no'
+),
+clicked AS (
+    SELECT COUNT(c.page_view) AS clicks
+    FROM clicks c
+    JOIN page_loads pl ON c.page_view = pl.page_view
+    WHERE c.date::date = '2020-01-29' AND pl.harvester_id = 'www.dagbladet.no'
+    )
+SELECT (clicks/views*100)|| '%' AS percentage
+FROM clicked, views;
+
+# A “session” begins when a user visits a page more than one hour after his or her last page load in a given day. 
+# How many unique users had more than one session on Dagbladet on January 29th?
+WITH date AS (
+    SELECT user_id, date - LAG(date) OVER (PARTITION BY user_id) AS diff
+    FROM page_loads
+    WHERE date::date = '2020-01-29' AND harvester_id = 'www.dagbladet.no'
+    ORDER BY user_id, date
+),
+     time_diff AS (
+         SELECT *
+         FROM date
+         GROUP BY user_id, diff
+         HAVING diff > '01:00:00'
+     )
+SELECT COUNT(DISTINCT user_id)
+FROM time_diff;
