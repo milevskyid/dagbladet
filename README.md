@@ -18,6 +18,7 @@ To provide an example, say you find the following data:
 This would mean that user “ABCDE” visited the page “dagbladet.no/7654321” at “2020-01-29 10:00:00”, and then from that page clicked on a link to “dagbladet.no/8756593” ten minutes later. 
 
 **Questions** 
+
 Using either Python or SQL (or a combination of the two), please provide code that answers the following questions: 
 1If you provide SQL, it is fine to pretend the CSV files are tables in a relational database. That is, there is no need to actually provide code for loading the CSV into tables.
 1. How many page loads did the Dagbladet front page receive on January 29th on desktop? (Note: The Dagbladet front page has the HarvesterID “www.dagbladet.no”) 
