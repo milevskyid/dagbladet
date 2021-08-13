@@ -1,5 +1,8 @@
 
-For this assignment, you will need to download two CSV files from the following links: Page Loads: https://storage.googleapis.com/aller-structure-task/page_loads.csv Clicks: https://storage.googleapis.com/aller-structure-task/clicks.csv 
+For this assignment, you will need to download two CSV files from the following links: 
+
+Page Loads: https://storage.googleapis.com/aller-structure-task/page_loads.csv 
+Clicks: https://storage.googleapis.com/aller-structure-task/clicks.csv 
 
 The page loads file contains one row for each page visit we received on the 29th of January. The following fields are included: 
 **UserID:** An ID to uniquely identify a visitor. 
