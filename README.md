@@ -4,16 +4,25 @@ For this assignment, you will need to download two CSV files from the following 
 Page Loads: https://storage.googleapis.com/aller-structure-task/page_loads.csv 
 Clicks: https://storage.googleapis.com/aller-structure-task/clicks.csv 
 
-The page loads file contains one row for each page visit we received on the 29th of January. The following fields are included: 
+The **page loads file** contains one row for each page visit we received on the 29th of January. The following fields are included: 
+
 **UserID:** An ID to uniquely identify a visitor. 
+
 **PageView:** An ID to uniquely identify the page visit. A new PageView is created every time a user refreshes a page. 
+
 **Site:** The name of the site the page visit occurred on. 
+
 **Device:** The device the visitor was using (desktop, mobile, tablet, etc). 
+
 **HarvesterID:** An ID to uniquely identify the page visited. For example, the Dagbladet front page has the HarvesterID “www.dagbladet.no”. 
+
 **Date:** The date and time when the user visited the page. 
-The clicks file contains one row for each click that occurred on one of our pages on the 29th of January. The following fields are included: 
+The **clicks file** contains one row for each click that occurred on one of our pages on the 29th of January. The following fields are included: 
+
 **PageView:** An ID to uniquely identify the page visit that the click occurred on. This can be used to join the clicks data with the page loads data, e.g. to find which page a click occurred on. 
+
 **Date:** The date and time when the user clicked the link. 
+
 **HarvesterID:** An ID to uniquely identify the page the user clicked on. 
 To provide an example, say you find the following data: 
 
